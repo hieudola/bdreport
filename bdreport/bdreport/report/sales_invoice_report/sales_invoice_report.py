@@ -44,14 +44,15 @@ def get_columns():
 	columns = []
 	return [
 		"Type::130","Series:Link/Sales Invoice:50","Invoice No.:Link/Sales Invoice:120","Date::90", "Customer Name::350",
-		"Tax No.::100","Description::350","Amount:Currency:150","VAT Amount:Currency:150","Total:Currency:150"
+		"Tax No.::100","Description::350","Amount:Float:150","VAT Amount:Float:150","Total:Float:150"
 	]
 	return columns
 
 def get_invoices(filters):
 	conditions = get_conditions(filters)
 
-	query = """SELECT DISTINCT so.parenttype,so.parenttype,so.name,so.posting_date, so.customer_name,so.tax_id,so1.item_name,so1.amount,so2.tax_amount,so2.total
+	query = """SELECT DISTINCT "","",so.name,so.posting_date, so.customer_name,so.tax_id,REPLACE(SUBSTRING(so1.income_account,11,1000),' - bd',' '),FORMAT(so.base_total,0),FORMAT(so.base_total_taxes_and_charges,0),
+	FORMAT(so.base_grand_total,0)
 	FROM `tabSales Invoice` so 
 	LEFT JOIN `tabSales Invoice Item` so1 	ON	 ( so1.parent = so.name) 
 	LEFT JOIN `tabSales Taxes and Charges` so2 	ON	 ( so2.parent = so.name) 
