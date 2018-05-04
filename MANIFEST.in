@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include bdreport *.css
+recursive-include bdreport *.csv
+recursive-include bdreport *.html
+recursive-include bdreport *.ico
+recursive-include bdreport *.js
+recursive-include bdreport *.json
+recursive-include bdreport *.md
+recursive-include bdreport *.png
+recursive-include bdreport *.py
+recursive-include bdreport *.svg
+recursive-include bdreport *.txt
+recursive-exclude bdreport *.pyc
