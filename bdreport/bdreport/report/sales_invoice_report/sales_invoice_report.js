@@ -21,7 +21,8 @@ frappe.query_reports["Sales Invoice Report"] = {
 				if (period=='Quarter' && period_num>5) {
 					frappe.query_report_filters_by_name.period_num.set_input(4);
 				}
-				query_report.trigger_refresh();
+				//query_report.trigger_refresh();
+				query_report.refresh();
 			}
 		},
 		{
@@ -38,7 +39,8 @@ frappe.query_reports["Sales Invoice Report"] = {
 				if (period=='Quarter' && period_num>5) {
 					frappe.query_report_filters_by_name.period_num.set_input(4);
 				}
-				query_report.trigger_refresh();
+				//query_report.trigger_refresh();
+				query_report.refresh();
 			}
 		},
 		{
@@ -47,6 +49,15 @@ frappe.query_reports["Sales Invoice Report"] = {
 			"fieldtype": "Data",
 			"default": new Date().getFullYear(),
 			"reqd": 1
+		},
+		,
+		{
+			"fieldname":"company",
+			"label": "Company",
+			"fieldtype": "Link",
+			"options": "Company",
+			"default": frappe.sys_defaults.company
 		}
+
 	]
 }
