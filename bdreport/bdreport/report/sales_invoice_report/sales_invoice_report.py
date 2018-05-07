@@ -36,9 +36,16 @@ def execute(filters=None):
 		filters.to_date = add_days(filters.to_date, -1)
 		#frappe.msgprint(filters.from_date)
 
+	
+	company = frappe.get_doc("Company", filters.company)
+
+	data_to_be_printed = {
+		"company": company,
+	}
+
 	columns = get_columns()
 	data = get_invoices(filters)
-	return columns, data, None, None
+	return columns, data, None, None, data_to_be_printed
 	
 def get_columns():
 	columns = []
@@ -51,14 +58,18 @@ def get_columns():
 def get_invoices(filters):
 	conditions = get_conditions(filters)
 
-	query = """SELECT DISTINCT "","",so.name,so.posting_date, so.customer_name,so.tax_id,REPLACE(SUBSTRING(so1.income_account,11,1000),' - bd',' '),FORMAT(so.base_total,0),FORMAT(so.base_total_taxes_and_charges,0),
+	query = """SELECT DISTINCT "","",so.name,so.posting_date, so.customer_name,so.tax_id,
+	GROUP_CONCAT(DISTINCT(REPLACE(SUBSTRING(so1.income_account,11,1000),' - bd',' '))),	
+	FORMAT(so.base_total,0),
+	FORMAT(so.base_total_taxes_and_charges,0),
 	FORMAT(so.base_grand_total,0)
 	FROM `tabSales Invoice` so 
 	LEFT JOIN `tabSales Invoice Item` so1 	ON	 ( so1.parent = so.name) 
 	LEFT JOIN `tabSales Taxes and Charges` so2 	ON	 ( so2.parent = so.name) 
+
 	WHERE so.docstatus = 1 
 	%s
-	""" %(conditions)
+	""" %(conditions) + """GROUP BY so.name"""
 
 	data = frappe.db.sql(query, as_list=1)
 
