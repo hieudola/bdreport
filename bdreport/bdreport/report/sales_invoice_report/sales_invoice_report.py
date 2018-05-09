@@ -71,12 +71,9 @@ def get_invoices(filters):
 	%s
 	""" %(conditions) + """GROUP BY so.name"""
 
-	data = frappe.db.sql(query, as_list=1)
-
-
+	data = frappe.db.sql(query, as_list=1, debug=1)
 
 	return data
-	
 
 def get_conditions(filters):
 	conditions = ""

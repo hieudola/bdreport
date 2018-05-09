@@ -50,7 +50,6 @@ frappe.query_reports["Sales Invoice Report"] = {
 			"default": new Date().getFullYear(),
 			"reqd": 1
 		},
-		,
 		{
 			"fieldname":"company",
 			"label": "Company",
@@ -58,6 +57,5 @@ frappe.query_reports["Sales Invoice Report"] = {
 			"options": "Company",
 			"default": frappe.sys_defaults.company
 		}
-
 	]
 }
