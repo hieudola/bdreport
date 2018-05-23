@@ -89,18 +89,18 @@ def set_account_currency(filters):
 
 def get_columns(filters):
 	columns = [
-		_("vi_Date") + ":Date:90", _("vi_Voucher") + ":Link/Journal Entry:300",
-		_("vi_Debit") + ":Float:100", _("vi_Credit") + ":Float:100"
+		_("Date","vi") + ":Date:90", _("Voucher","vi") + ":Link/Journal Entry:300",
+		_("Debit","vi") + ":Float:100", _("Credit","vi") + ":Float:100"
 	]
 
 	if filters.get("show_in_account_currency"):
 		columns += [
-			_("vi_Debit") + " (" + filters.account_currency + ")" + ":Float:100",
-			_("vi_Credit") + " (" + filters.account_currency + ")" + ":Float:100"
+			_("Debit","vi") + " (" + filters.account_currency + ")" + ":Float:100",
+			_("Credit","vi") + " (" + filters.account_currency + ")" + ":Float:100"
 		]
 
 	columns += [
-		_("vi_Remarks") + "::550"
+		_("Remarks","vi") + "::550"
 	]
 
 	return columns
@@ -230,10 +230,10 @@ def get_totals_dict():
 			credit_in_account_currency = 0.0
 		)
 	return _dict(
-		opening = _get_debit_credit_dict(_('vi_opening')),
-		total = _get_debit_credit_dict(_('vi_total')),
-		closing = _get_debit_credit_dict(_('vi_closing')),
-		total_closing = _get_debit_credit_dict(_('vi_closing_balance'))
+		opening = _get_debit_credit_dict(_('opening','vi')),
+		total = _get_debit_credit_dict(_('total','vi')),
+		closing = _get_debit_credit_dict(_('closing','vi')),
+		total_closing = _get_debit_credit_dict(_('closing_balance','vi'))
 	)
 
 def initialize_gle_map(gl_entries):

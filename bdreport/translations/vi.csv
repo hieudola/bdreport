@@ -1,1 +1,9 @@
-,vi_Date,Ngày
+,Date,Ngày
+,Voucher,Số Chứng Từ
+,Debit,Thu
+,Credit,Chi
+,Remarks,Nội Dung
+,opening,Số dư đầu kỳ
+,total,Tổng số phát sinh
+,closing,Tổng số dư (Số dư đầu kỳ + Tổng phát sinh)
+,closing_balance,Số dư cuối kỳ
